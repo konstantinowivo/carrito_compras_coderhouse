@@ -33,10 +33,8 @@ if(producto == "extintor 1" || producto == "extintor 2" || producto == "extintor
         case "extintor 2":
             precio = 11000;
             break;
-        case "exintor 3":
+        case "extintor 3":
             precio = 18000;
-            break;
-        default:
             break;
     }
 let cantidad = parseInt(prompt("cantidad de productos?"));
@@ -58,5 +56,6 @@ while(seleccion === "no"){
     }
 }
 
-const total = carrito.reduce((acc, el) => acc + el.precio + el.cantidad, 0)
+const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)
 console.log(`el total a pagar por su compra es: ${total}`)
+
