@@ -45,10 +45,11 @@ console.log(carrito)
     alert("no existe ese producto")
 }
 
-seleccion = prompt("desea seguir comprando?")
+seleccion = prompt("desea seguir comprando?");
+
 
 while(seleccion === "no"){
-    alert("gracias por tu compra")
+    alert(`gracias por su compra`)
     carrito.forEach((carritoFinal) => {
         console.log(`producto: ${carritoFinal.producto}, unidades: ${carritoFinal.cantidad}, total: ${carritoFinal.cantidad * carritoFinal.precio}`)
         })
@@ -58,4 +59,17 @@ while(seleccion === "no"){
 
 const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)
 console.log(`el total a pagar por su compra es: ${total}`)
+
+
+function suma(){
+    console.log(total);
+    alert(`El monto final de tu compra es: $ ${total}`)
+    }
+
+suma(total)
+
+
+
+
+
 
