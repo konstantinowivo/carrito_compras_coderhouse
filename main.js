@@ -66,7 +66,9 @@ function suma(){
     alert(`El monto final de tu compra es: $ ${total}`)
     }
 
-suma(total)
+const botonCompra = document.getElementById('clickCompra');
+
+botonCompra.addEventListener("click", suma);
 
 
 
