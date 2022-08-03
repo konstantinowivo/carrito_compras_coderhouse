@@ -1,77 +1,69 @@
-const producto = [
-    { nombre: "extintor 1", precio: 2700 },
-    { nombre: "extintor 2", precio: 11000 },
-    { nombre: "extintor 3", precio: 18000 },
-];
+let btnCarrito = document.querySelector("#cart");
+let carrito = document.querySelector(".cart-modal-overlay");
+let cerrarCarrito = document.querySelector("#close-btn");
+let arrayCarrito = []
 
-let carrito = []
-
-let seleccion = prompt("hola! deseas comprar algún producto?");
-
-while(seleccion != "si" && seleccion != "no"){
-    alert("favor de responder con si o no")
-    seleccion = prompt("hola! deseas comprar algún producto?")
-}
-
-if(seleccion == "si"){
-    alert("Catálogo de productos:")
-    let catalogoProductos = producto.map((producto) => producto.nombre + " " + "$" + producto.precio);
-    alert(catalogoProductos.join(" - "))
-} else if(seleccion == "no"){
-    alert("Muchas gracias por tu visita!")
-}
-
-while(seleccion != "no"){
-    let producto = prompt("agregar producto:")
-    let precio = 0
-
-if(producto == "extintor 1" || producto == "extintor 2" || producto == "extintor 3"){
-    switch(producto){
-        case "extintor 1":
-            precio = 2700;
-            break;
-        case "extintor 2":
-            precio = 11000;
-            break;
-        case "extintor 3":
-            precio = 18000;
-            break;
-    }
-let cantidad = parseInt(prompt("cantidad de productos?"));
-
-carrito.push({producto, cantidad, precio})
-console.log(carrito)
-} else{
-    alert("no existe ese producto")
-}
-
-seleccion = prompt("desea seguir comprando?");
-
-
-while(seleccion === "no"){
-    alert(`gracias por su compra`)
-    carrito.forEach((carritoFinal) => {
-        console.log(`producto: ${carritoFinal.producto}, unidades: ${carritoFinal.cantidad}, total: ${carritoFinal.cantidad * carritoFinal.precio}`)
-        })
-    break;
+class Producto{
+    constructor(id, nombre, imagen, precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.imagen = imagen;
+        this.precio = precio;
     }
 }
-
-const total = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0)
-console.log(`el total a pagar por su compra es: ${total}`)
-
-
-function suma(){
-    console.log(total);
-    alert(`El monto final de tu compra es: $ ${total}`)
+//abrir y cerrar el carrito
+function abriCerrarCarrito() {
+    if(carrito.classList.contains("open")) {
+        carrito.classList.remove("open");
+    } else {
+        carrito.classList.add("open");
     }
+    
+}
+btnCarrito.addEventListener("click", abriCerrarCarrito);
+cerrarCarrito.addEventListener("click", abriCerrarCarrito);
 
-const botonCompra = document.getElementById('clickCompra');
+//agregar elementos al carrito
+let botonesComprar = document.querySelectorAll(".add-to-cart");
+console.log(botonesComprar);
+for(let i=0; i < botonesComprar.length; i++) {
+    let boton = botonesComprar[i];
+    boton.addEventListener("click", agregarCarrito);
+}
 
-botonCompra.addEventListener("click", suma);
+function agregarCarrito(e) {
+    let boton = e.target;
+    let padre = boton.parentElement;
+    let prodId = padre.getAttribute("id");
+    let prodNombre = padre.querySelector("h3").innerText;
+    let precio = padre.querySelector(".product-price").innerText;
+    let imagen = padre.querySelector(".product-image").src;
 
+    let prodNuevo = new Producto(prodId, prodNombre, imagen, precio);
+    arrayCarrito.push(prodNuevo);
 
+    localStorage.setItem("carrito", JSON.stringify(arrayCarrito));
 
+    agregarElemCarrito(prodNuevo);
 
+}
 
+function agregarElemCarrito(producto){
+    let contenedorCarrito = document.querySelector(".product-rows");
+    let carritoStorage = JSON.parse(localStorage.getItem("carrito"));
+    console.log(carritoStorage);
+    contenedorCarrito.innerHTML += `
+        <div class='product-row' id='${producto.id}'>
+            <img class='cart-image' src='${producto.imagen}' />
+            <span>${producto.nombre}</span>
+            <span>${producto.precio}</span>
+            <button class='remove-btn'>X</button>
+        </div>
+    `
+    cartQuantity();
+}
 
+function cartQuantity() {
+    let cantidad = document.querySelector(".cart-quantity");
+    cantidad.innerText = arrayCarrito.length;
+}
