@@ -1,6 +1,6 @@
 const Clickbutton = document.querySelectorAll('.button')
 const comprar = document.querySelector('#comprar');
-const tbody = document.querySelector('.tbody')
+const tbody = document.querySelector('.tbody');
 let carrito = []
 
 Clickbutton.forEach(btn => {
@@ -8,12 +8,13 @@ Clickbutton.forEach(btn => {
 })
 
 comprar.addEventListener('click', () => {
-    Swal.fire({
+      Swal.fire({
       icon: 'success',
       title: 'Muchas gracias por tu compra!',
       text: 'Tu envío está siendo preparado',
     })
 })
+
 
 function addToCarritoItem(e){
   const button = e.target
