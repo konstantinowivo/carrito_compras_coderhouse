@@ -12,7 +12,8 @@ comprar.addEventListener('click', () => {
       icon: 'success',
       title: 'Muchas gracias por tu compra!',
       text: 'Tu envío está siendo preparado',
-    })
+})
+localStorage.clear();
 })
 
 
@@ -40,7 +41,7 @@ function addItemCarrito(newItem){
 
   setTimeout( function(){
     alert.classList.add('hide')
-  }, 2000)
+  }, 1000)
     alert.classList.remove('hide')
 
   const InputElemnto = tbody.getElementsByClassName('input__elemento')
