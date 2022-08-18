@@ -1,7 +1,29 @@
+const boton = document.querySelector("#btn");
+const contenedor = document.querySelector("#fetch");
 const Clickbutton = document.querySelectorAll('.button')
 const comprar = document.querySelector('#comprar');
 const tbody = document.querySelector('.tbody');
 let carrito = []
+
+const obtenerDatos = ()=>{
+  fetch("https://jsonplaceholder.typicode.com/users")
+  .then(response => response.json())
+  .then(result => {
+    result.forEach(persona =>{
+      contenedor.innerHTML += `
+      <div>
+        <h3>${persona.name}</h3>
+        <p>${persona.email} anios</p>
+        <p>dirección: ${persona.adress}</p>
+        `
+    })
+  })
+}
+
+boton.onclick = ()=> {
+  obtenerDatos();
+}
+
 
 Clickbutton.forEach(btn => {
   btn.addEventListener('click', addToCarritoItem)
