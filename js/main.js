@@ -30,12 +30,14 @@ Clickbutton.forEach(btn => {
 })
 
 comprar.addEventListener('click', () => {
-      Swal.fire({
-      icon: 'success',
-      title: 'Muchas gracias por tu compra!',
-      text: 'Tu envío está siendo preparado',
+  carrito = []
+  Swal.fire({
+  icon: 'success',
+  title: 'Muchas gracias por tu compra!',
+  text: 'Tu envío está siendo preparado',
 })
-localStorage.clear();
+  localStorage.removeItem('carrito');
+  renderCarrito()
 })
 
 
