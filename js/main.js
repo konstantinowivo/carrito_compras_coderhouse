@@ -1,10 +1,12 @@
 const boton = document.querySelector("#btn");
-const contenedor = document.querySelector("#fetch");
+// const contenedor = document.querySelector("#fetch"); <-- fue usado para un desafío
 const Clickbutton = document.querySelectorAll('.button')
 const comprar = document.querySelector('#comprar');
 const tbody = document.querySelector('.tbody');
 let carrito = []
 
+
+/* usado para un desafío
 const obtenerDatos = ()=>{
   fetch("https://jsonplaceholder.typicode.com/users")
   .then(response => response.json())
@@ -23,6 +25,7 @@ const obtenerDatos = ()=>{
 boton.onclick = ()=> {
   obtenerDatos();
 }
+*/
 
 
 Clickbutton.forEach(btn => {
